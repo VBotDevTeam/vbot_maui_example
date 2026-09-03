@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>24.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>VBot.Android.Binding</RootNamespace>
+  </PropertyGroup>
+
+  <Target Name="DownloadAndroidSdkAar" BeforeTargets="BeforeBuild;BeforeCompile" Condition="!Exists('$(MSBuildProjectDirectory)\Jars\vbot-phone-sdk-android-1.1.2.aar')">
+    <MakeDir Directories="$(MSBuildProjectDirectory)\Jars" />
+    <Message Importance="high" Text="Downloading VBot Phone Android SDK AAR from Maven Static Repository..." />
+    <DownloadFile
+      SourceUrl="https://raw.githubusercontent.com/VBotDevTeam/VBotPhoneSDKAndroid-Public/main/com/github/VBotDevTeam/VBotPhoneSDKAndroid-Public/1.1.2/VBotPhoneSDKAndroid-Public-1.1.2.aar"
+      DestinationFolder="$(MSBuildProjectDirectory)\Jars"
+      DestinationFileName="vbot-phone-sdk-android-1.1.2.aar" />
+  </Target>
+
+  <ItemGroup>
+    <!-- Include AAR files from Jars folder -->
+    <AndroidLibrary Include="Jars\*.aar" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TransformFile Include="Transforms/Metadata.xml" />
+  </ItemGroup>
+</Project>

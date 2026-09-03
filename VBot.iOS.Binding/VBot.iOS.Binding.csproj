@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0-ios</TargetFramework>
+    <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>VBot.iOS.Binding</RootNamespace>
+  </PropertyGroup>
+
+  <Target Name="DownloadIosSdk" BeforeTargets="BeforeBuild;BeforeCompile" Condition="!Exists('$(MSBuildProjectDirectory)\VBotPhoneSDK.xcframework')">
+    <Message Importance="high" Text="Fetching VBot Phone iOS SDK XCFramework from Public GitHub Repository..." />
+    <Exec Command="git clone --depth 1 --branch 1.1.9 https://github.com/VBotDevTeam/VBotPhoneSDKiOS-Public.git &quot;$(IntermediateOutputPath)vbot_ios_sdk&quot; &amp;&amp; cp -R &quot;$(IntermediateOutputPath)vbot_ios_sdk/iOS/VBotPhoneSDK.xcframework&quot; &quot;$(MSBuildProjectDirectory)/&quot; &amp;&amp; rm -rf &quot;$(IntermediateOutputPath)vbot_ios_sdk&quot;" />
+  </Target>
+
+  <ItemGroup Condition="Exists('VBotPhoneSDK.xcframework')">
+    <NativeReference Include="VBotPhoneSDK.xcframework">
+      <Kind>Framework</Kind>
+      <SmartLink>true</SmartLink>
+      <Frameworks>UIKit Foundation AVFoundation CallKit PushKit CoreTelephony AudioToolbox SystemConfiguration</Frameworks>
+      <LinkerFlags>-ObjC</LinkerFlags>
+    </NativeReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('VBotIosWrapper.xcframework')">
+    <NativeReference Include="VBotIosWrapper.xcframework">
+      <Kind>Framework</Kind>
+      <SmartLink>true</SmartLink>
+      <ForceLoad>true</ForceLoad>
+      <Frameworks>UIKit Foundation AVFoundation CallKit PushKit</Frameworks>
+      <LinkerFlags>-ObjC</LinkerFlags>
+    </NativeReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('VoiceLib.xcframework')">
+    <NativeReference Include="VoiceLib.xcframework">
+      <Kind>Framework</Kind>
+      <SmartLink>true</SmartLink>
+      <Frameworks>UIKit Foundation AVFoundation</Frameworks>
+    </NativeReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+</Project>

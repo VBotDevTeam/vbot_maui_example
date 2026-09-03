@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VBotMauiApp.ViewModels"
+             x:Class="VBotMauiApp.Views.CallPage"
+             x:DataType="vm:CallViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.BackButtonBehavior="{BackButtonBehavior IsVisible=False, IsEnabled=False}"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#121212}"
+             Title="{Binding Title}">
+
+    <Grid RowDefinitions="*, Auto" Padding="24">
+        
+        <!-- Center Call Info -->
+        <VerticalStackLayout Grid.Row="0"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Spacing="16">
+            
+            <!-- Avatar Icon -->
+            <Border StrokeShape="RoundRectangle 50"
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    BackgroundColor="#E3F2FD"
+                    HorizontalOptions="Center">
+                <Label Text="CALL"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#1976D2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Border>
+
+            <!-- Caller / Callee Name -->
+            <Label Text="{Binding CallerName}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Call State Text -->
+            <Label Text="{Binding CallStatusText}"
+                   FontSize="16"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Call Duration Timer (Khi cuộc gọi active) -->
+            <Label Text="{Binding CallDuration}"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#1E88E5"
+                   IsVisible="{Binding IsConfirmed}"
+                   HorizontalTextAlignment="Center" />
+
+        </VerticalStackLayout>
+
+        <!-- Bottom Action Controls -->
+        <VerticalStackLayout Grid.Row="1" Spacing="20" Margin="0,0,0,24">
+            
+            <!-- In-Call Controls (Mute & Speaker) -->
+            <HorizontalStackLayout Spacing="24"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding IsConfirmed}">
+                
+                <!-- Mute Button -->
+                <Button Text="{Binding IsMuted, Converter={StaticResource BoolToMuteTextConverter}}"
+                        Command="{Binding ToggleMuteCommand}"
+                        BackgroundColor="{Binding IsMuted, Converter={StaticResource BoolToMuteColorConverter}}"
+                        TextColor="White"
+                        CornerRadius="24"
+                        HeightRequest="48"
+                        WidthRequest="130"
+                        FontAttributes="Bold" />
+
+                <!-- Speaker Button -->
+                <Button Text="{Binding IsSpeakerOn, Converter={StaticResource BoolToSpeakerTextConverter}}"
+                        Command="{Binding ToggleSpeakerCommand}"
+                        BackgroundColor="{Binding IsSpeakerOn, Converter={StaticResource BoolToSpeakerColorConverter}}"
+                        TextColor="White"
+                        CornerRadius="24"
+                        HeightRequest="48"
+                        WidthRequest="130"
+                        FontAttributes="Bold" />
+            </HorizontalStackLayout>
+
+            <!-- Incoming Actions: Trả lời & Từ chối -->
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="16" IsVisible="{Binding IsIncoming}">
+                <Button Grid.Column="0"
+                        Text="Từ chối"
+                        Command="{Binding HangupCommand}"
+                        BackgroundColor="#E53935"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="52"
+                        FontAttributes="Bold" />
+
+                <Button Grid.Column="1"
+                        Text="Trả lời"
+                        Command="{Binding AnswerCommand}"
+                        BackgroundColor="#43A047"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="52"
+                        FontAttributes="Bold" />
+            </Grid>
+
+            <!-- Outgoing / Active Call: Nút Tắt máy -->
+            <Button Text="Tắt máy"
+                    Command="{Binding HangupCommand}"
+                    IsVisible="{Binding IsIncoming, Converter={StaticResource InvertBoolConverter}}"
+                    BackgroundColor="#E53935"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="52"
+                    FontAttributes="Bold"
+                    FontSize="16" />
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

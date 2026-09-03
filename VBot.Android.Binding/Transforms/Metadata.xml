@@ -1,0 +1,12 @@
+<metadata>
+  <!--
+  This sample file is used to customize the generated C# bindings for Android Java/Kotlin libraries.
+  -->
+  <!-- Renaming Java package to C# Namespace -->
+  <attr path="/api/package[@name='com.vpmedia.sdkvbot.client']" name="managedName">VBot.Android.SDK</attr>
+  <attr path="/api/package[@name='com.vpmedia.sdkvbot.en']" name="managedName">VBot.Android.SDK.Enums</attr>
+
+  <!-- Exclude internal / shaded Java packages from C# binding generation -->
+  <remove-node path="/api/package[starts-with(@name, 'org.pjsip')]" />
+  <remove-node path="/api/package[starts-with(@name, 'com.vpmedia.sdkvbot.shaded')]" />
+</metadata>

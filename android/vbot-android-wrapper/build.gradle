@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+// =========================================================================
+// BƯỚC 1 (Theo Tài Liệu VBot): Khai báo Maven Repository của VBot SDK
+// =========================================================================
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://raw.githubusercontent.com/VBotDevTeam/VBotPhoneSDKAndroid-Public/main/' }
+}
+
+android {
+    namespace 'com.vpmedia.vbot.wrapper'
+    compileSdkVersion 34
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 34
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+
+    // VBot SDK Android
+    implementation 'com.github.VBotDevTeam:VBotPhoneSDKAndroid-Public:1.1.2'
+
+    // Firebase Messaging
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+}
