@@ -27,10 +27,10 @@
 		<NoWarn>$(NoWarn);NETSDK1202</NoWarn>
 	</PropertyGroup>
 
-	<!-- Tối ưu tốc độ Build & Debug cho iOS -->
-	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Debug'">
-		<UseInterpreter>true</UseInterpreter>
-		<MtouchLink>None</MtouchLink>
+	<!-- Cấu hình Linker cho iOS -->
+	<PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
+		<UseInterpreter Condition="'$(Configuration)' == 'Debug'">true</UseInterpreter>
+		<MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
 
 	<ItemGroup>
