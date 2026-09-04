@@ -41,6 +41,6 @@ jobs:
         run: |
           dotnet build VBotMauiApp/VBotMauiApp.csproj -f net9.0-android -c Release --no-restore
 
-      - name: Build iOS App
+      - name: Build iOS App (Simulator)
         run: |
-          dotnet build VBotMauiApp/VBotMauiApp.csproj -f net9.0-ios -c Release --no-restore -p:ValidateXcodeVersion=false
+          dotnet build VBotMauiApp/VBotMauiApp.csproj -f net9.0-ios -c Release --no-restore -p:RuntimeIdentifier=iossimulator-arm64 -p:EnableCodeSigning=false
