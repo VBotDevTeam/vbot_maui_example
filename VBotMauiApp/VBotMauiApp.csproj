@@ -23,6 +23,7 @@
 		<!-- iOS Target / Support -->
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
 		<CodesignEntitlements Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">Platforms\iOS\Entitlements.plist</CodesignEntitlements>
+		<ValidateXcodeVersion>false</ValidateXcodeVersion>
 		<NoWarn>$(NoWarn);NETSDK1202</NoWarn>
 	</PropertyGroup>
 

@@ -43,4 +43,4 @@ jobs:
 
       - name: Build iOS App
         run: |
-          dotnet build VBotMauiApp/VBotMauiApp.csproj -f net9.0-ios -c Release --no-restore
+          dotnet build VBotMauiApp/VBotMauiApp.csproj -f net9.0-ios -c Release --no-restore -p:ValidateXcodeVersion=false
