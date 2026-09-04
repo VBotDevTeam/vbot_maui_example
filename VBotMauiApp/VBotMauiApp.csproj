@@ -23,6 +23,7 @@
 		<!-- iOS Target / Support -->
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
 		<CodesignEntitlements Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">Platforms\iOS\Entitlements.plist</CodesignEntitlements>
+		<NoWarn>$(NoWarn);NETSDK1202</NoWarn>
 	</PropertyGroup>
 
 	<!-- Tối ưu tốc độ Build & Debug cho iOS -->
@@ -62,8 +63,8 @@
 	</ItemGroup>
 
 	<!-- Google Services configuration for Android FCM -->
-	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-		<GoogleServicesJson Include="Platforms\Android\google-services.json" />
+	<ItemGroup Condition="$(TargetFramework.Contains('-android')) and Exists('Platforms/Android/google-services.json')">
+		<GoogleServicesJson Include="Platforms/Android/google-services.json" />
 	</ItemGroup>
 
 </Project>
