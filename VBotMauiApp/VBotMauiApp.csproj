@@ -56,18 +56,14 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 	</ItemGroup>
 
-	<!-- Conditional Project References for Native Bindings -->
+	<!-- VBot Phone SDK from NuGet -->
+	<ItemGroup>
+		<PackageReference Include="VBot.Phone.SDK.Maui" Version="1.0.1" />
+	</ItemGroup>
+
+	<!-- Google Services configuration for Android FCM -->
 	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-		<ProjectReference Include="..\VBot.Android.Binding\VBot.Android.Binding.csproj" />
 		<GoogleServicesJson Include="Platforms\Android\google-services.json" />
-	</ItemGroup>
-
-	<ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-		<ProjectReference Include="..\VBot.iOS.Binding\VBot.iOS.Binding.csproj" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
-	  <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.4.0" />
 	</ItemGroup>
 
 </Project>

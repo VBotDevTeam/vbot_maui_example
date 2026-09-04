@@ -5,6 +5,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using UIKit;
 using VBot.iOS.SDK;
+using VBot.Phone.SDK.Maui;
 using VBotMauiApp.Services;
 
 namespace VBotMauiApp;

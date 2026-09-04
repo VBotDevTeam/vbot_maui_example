@@ -2,7 +2,7 @@ using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
-using VBotMauiApp.Services;
+using VBot.Phone.SDK.Maui;
 using VBotMauiApp.ViewModels;
 using VBotMauiApp.Views;
 
@@ -24,8 +24,8 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        // Services
-        builder.Services.AddSingleton<IVBotPhoneService, VBotPhoneService>();
+        // VBot Phone SDK
+        builder.Services.AddVBotPhone();
 
         // ViewModels
         builder.Services.AddTransient<MainViewModel>();

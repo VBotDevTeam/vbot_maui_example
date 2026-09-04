@@ -1,4 +1,5 @@
 using Android.Content;
+using VBot.Phone.SDK.Maui;
 using VBotMauiApp.Services;
 
 namespace VBotMauiApp.Platforms.Android;

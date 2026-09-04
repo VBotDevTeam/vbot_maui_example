@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
-using VBotMauiApp.Models;
+using VBot.Phone.SDK.Maui;
 using VBotMauiApp.Services;
 using VBotMauiApp.Views;
 

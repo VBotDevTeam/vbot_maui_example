@@ -4,7 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Firebase.Messaging;
-using VBotMauiApp.Services;
+using VBot.Phone.SDK.Maui;
 
 namespace VBotMauiApp.Platforms.Android;
 
